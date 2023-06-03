@@ -6,7 +6,7 @@
   "author": "Oladipo Adesiyan",
   "license": "MIT",
   "scripts": {
-    "start": "tsnd --respawn --transpile-only --exit-child src/app.ts"
+    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.14.1",
