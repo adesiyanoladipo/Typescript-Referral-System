@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { CreateUserInput } from "./user.schema";
-import service from "./user.service"
+import repository from "./user.repository"
 
 export async function registerUserHandler(
     request: FastifyRequest<{
@@ -10,7 +10,7 @@ export async function registerUserHandler(
 ) {
     try{
         const body = request.body
-        const userExists = await service.findUserByEmail(body.email)
+        const userExists = await repository.findUserByEmail(body.email)
         if(userExists){
             return reply.code(400).send({
                 status: 400,
@@ -18,7 +18,7 @@ export async function registerUserHandler(
                 message: "User already exists"
             })
         }
-        const referralCodeExists = await service.findUserByreferralCode(body.referredBy as string)
+        const referralCodeExists = await repository.findUserByreferralCode(body.referredBy as string)
         if(!referralCodeExists && body.referredBy){
             return reply.code(400).send({
                 status: 400,
@@ -26,7 +26,7 @@ export async function registerUserHandler(
                 message: `User with referral code ${body.referredBy} does not exist`
             })
         }
-        const user = await service.createUser(body)
+        const user = await repository.createUser(body)
         return reply.code(200).send({
             status: 200,
             success: true,
