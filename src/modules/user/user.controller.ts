@@ -18,6 +18,14 @@ export async function registerUserHandler(
                 message: "User already exists"
             })
         }
+        const referralCodeExists = await service.findUserByreferralCode(body.referredBy as string)
+        if(!referralCodeExists && body.referredBy){
+            return reply.code(400).send({
+                status: 400,
+                success: false,
+                message: `User with referral code ${body.referredBy} does not exist`
+            })
+        }
         const user = await service.createUser(body)
         return reply.code(200).send({
             status: 200,

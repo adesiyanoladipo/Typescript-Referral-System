@@ -7,12 +7,11 @@ const service = {
     async createUser(input: CreateUserInput) {
         const { password, ...rest } = input
         const { hash } = hashPassword(password) 
-        const referralCode = Utils.generateString(6)
+        const referralCode = Utils.generateString(5)
         const referredBy = input.referredBy !== undefined ? input.referredBy : '';
-    
-        console.log(rest, hash, referralCode, referredBy)
+
         const user = await prisma.user.create({
-            data: { ...rest, password: hash, referralCode, referredBy: referredBy as string }
+            data: { ...rest, password: hash, referralCode: referralCode.trim(), referredBy: referredBy as string }
         })
         return user;
     },
@@ -22,6 +21,15 @@ const service = {
             where: { email }
         })
         return user;
+    },
+    async findUserByreferralCode(input: string) {
+        if(!input){
+            return null
+        }
+        const user = await prisma.user.findUnique({ 
+            where: { referralCode: input }
+        }) 
+        return user
     }
 }
 
