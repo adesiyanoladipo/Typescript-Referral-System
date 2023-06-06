@@ -13,7 +13,6 @@ const repository = {
     async createUser(input: user) {
         const user = await service.createUser(input) 
         if(user){
-            console.log(user)
             return user
         }
         return null

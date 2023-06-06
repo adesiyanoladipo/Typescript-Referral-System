@@ -16,7 +16,7 @@ model User {
   name String
   password String
   referralCode String @unique
-  referredBy String @unique 
+  referredBy String 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

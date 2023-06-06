@@ -6,12 +6,12 @@ const userCore = {
         required_error: "Email is necessary",
         invalid_type_error: "Email is invalid"
     }),
-    referralCode: z.string().length(5).optional(),
-    referredBy: z.string().length(5).optional(),
     name: z.string({
         required_error: "Name is necessary",
         invalid_type_error: "Name is invalid"
     }),
+    referralCode: z.string().length(5).optional(),
+    referredBy: z.string().length(5).optional(),
 }
 
 const createUserSchema = z.object({
