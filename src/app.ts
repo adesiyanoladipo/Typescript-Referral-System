@@ -19,7 +19,6 @@ server.get('/healthcheck', async function(){
 })
 
 async function main() {
-    const now = () => Date.now();
 
     for (const schema of [...userSchema, ]){
         server.addSchema(schema)

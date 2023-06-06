@@ -10,7 +10,10 @@ const service = {
         const referralCode = Utils.generateString(5)
         const referredBy = input.referredBy !== undefined ? input.referredBy : '';
         const user = await prisma.user.create({
-            data: { ...rest, password: hash, referralCode: referralCode.trim(), referredBy: referredBy as any}
+            data: { ...rest, referralCode: referralCode.trim(), referredBy: referredBy as any}
+        })
+        await prisma.auth.create({
+            data: { userId: user.id, password: hash }
         })
         return user;
     },

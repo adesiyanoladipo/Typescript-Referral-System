@@ -27,7 +27,11 @@ export async function registerUserHandler(
             })
         }
         const user = await repository.createUser(body)
-        return reply.code(201).send(user)
+        return reply.code(201).send({
+            status: 201,
+            success: true,
+            message: user
+        })
     }
     catch(e){
         console.log(e)

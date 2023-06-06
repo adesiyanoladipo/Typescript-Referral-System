@@ -7,10 +7,7 @@ async function userRoutes(server: FastifyInstance ) {
         '/add-user', 
         {
         schema: {
-            body: $ref('createUserSchema'),
-            response: {
-                201: $ref('createUserResponseSchema')
-            }
+            body: $ref('createUserSchema')
         }
     }, 
     registerUserHandler
@@ -18,9 +15,3 @@ async function userRoutes(server: FastifyInstance ) {
 }
 
 export default userRoutes
-
-// response: {
-//     status: 201,
-//     success: true,
-//     message: $ref('createUserResponseSchema')
-// }
