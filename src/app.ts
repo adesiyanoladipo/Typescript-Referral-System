@@ -1,6 +1,7 @@
 import Fastify from "fastify";
-import userRoutes from "./modules/user/user.route";
-import { userSchema  } from './modules/user/user.schema';
+import authRoutes from "./modules/auth/auth.route";
+import { authSchema  } from './modules/auth/auth.schema';
+import config from 'config'
 const uuidv4 = require("uuid").v4;
 
 import dotenv from "dotenv"
@@ -20,10 +21,10 @@ server.get('/healthcheck', async function(){
 
 async function main() {
 
-    for (const schema of [...userSchema, ]){
+    for (const schema of [...authSchema, ]){
         server.addSchema(schema)
     }
-    server.register(userRoutes, { prefix: 'api/users'})
+    server.register(authRoutes, { prefix: 'api/auth/'})
     try{
         const port = Number(process.env.PORT) || 3000 
         await server.listen({ port: port })
