@@ -7,12 +7,31 @@ import { z } from "zod";
 const auth = {
     async registerUserHandler(
         request: FastifyRequest<{
-        Body: CreateUserInput
+        Body: {
+            name: string,
+            email: string;
+            password: string;
+            referredBy: string;
+            }
         }>,
         reply: FastifyReply
     ) {
         try{
             const body = request.body
+            let { name, email, password, referredBy } = request.body;
+            if (
+                !name?.trim() ||
+                !email?.trim() ||
+                !password?.trim()
+              ) {
+                return reply.code(400).send({
+                    status: 400,
+                    success: false,
+                    message: "All fields are required",
+                });
+              }
+            referredBy = referredBy !== null ? request.body.referredBy : ''
+        
             const userExists = await repository.findUserByEmail(body.email)
             if(userExists){
                 return reply.code(400).send({
