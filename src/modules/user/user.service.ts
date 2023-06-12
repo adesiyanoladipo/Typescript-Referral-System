@@ -1,4 +1,5 @@
 import prisma from "../../utils/prisma.util";
+import type from './user.interface'
 
 const service = {
     async findUserByEmail(userEmail: string) {
@@ -25,6 +26,23 @@ const service = {
             where: { id: userId }
         }) 
         return user
+    },
+    // async getPaginatedReferrals(user: type["User"], offset: Number, pageSize: Number){
+    //     const users = await prisma.user.findMany({
+    //         where: {
+    //             referredBy: user.referralCode,
+    //         },
+    //         skip: offset,
+    //         take: pageSize
+    //     })
+    // },
+    async getUserReferrals(user: type["User"]){
+        const users = await prisma.user.findMany({
+            where: {
+                referredBy: user.referralCode,
+            }
+        })
+        return users
     }
 }
 

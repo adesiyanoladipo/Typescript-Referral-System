@@ -47,8 +47,7 @@ const authMiddleware = {
                 success: false,
                 message: "Login to proceed"
             })
-        }
-        
+        } 
     }
 }
 

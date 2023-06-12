@@ -1,16 +1,20 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import repository from "./user.repository"
+import type from './user.interface'
 
 const user = {
     async userDashboardHandler(
-        request: FastifyRequest<{
-        }>,
+        request: FastifyRequest,
         reply: FastifyReply
     ) {
         try{
+            const referral = await repository.getuserReferrals(request.user as type["User"])
             return reply.code(201).send({
                 status: 201,
                 success: true,
-                message: request.user
+                message: 
+                    request.user,
+                    referrals: referral!.length
             })
         }
         catch(e){

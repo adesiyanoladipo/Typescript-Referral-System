@@ -1,7 +1,6 @@
 import userService from "../user/user.service"
 import authService from "./auth.service"
-
-import type from './auth.interface'
+import type from '../user/user.interface'
 
 const repository = {
     async findUserByEmail(email:string) {
