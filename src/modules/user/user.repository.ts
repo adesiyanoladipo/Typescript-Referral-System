@@ -10,26 +10,31 @@ const repository = {
             return user
         }
     },
-    // async getuserPaginatedReferrals(user: type["User"], offset: Number, pageSize: Number){
-    //     const userReferrals = await userService.getPaginatedReferrals(user, offset, pageSize)
-    //     if(!userReferrals){
-    //         return null
-    //     }
-    //     else {
-    //         return userReferrals
-    //     }
+    async getuserPaginatedReferrals(user: type["User"], offset: number, pageSize: number){
+        const userReferrals = await userService.getPaginatedReferrals(user, offset, pageSize)
+        if(!userReferrals){
+            return null
+        }
+        else {
+            return userReferrals
+        }
         
-    // },
-    async getuserReferrals(user: type["User"]){
+    },
+    async getuserReferrals(user: type["User"], offset?: number, pageSize?: number){
         try{
-            const userReferrals = await userService.getUserReferrals(user)
+            if(!offset && !pageSize){
+                const page = 1;
+                pageSize = 5
+                offset = (page - 1) * Number(pageSize)
+            }
+
+            const userReferrals = await userService.getUserReferrals(user, offset!, pageSize!)
             if(!userReferrals){
                 return null
             }
             else {
                 return userReferrals
             }
-            
         }
         catch(err){
             console.log(err)

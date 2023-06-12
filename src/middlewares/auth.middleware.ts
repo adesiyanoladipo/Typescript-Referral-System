@@ -32,7 +32,6 @@ const authMiddleware = {
                 })
             }
             request.user = await userRepository.getUserById(authUserId.userId) as Object;
-            done()
         } 
         catch (error) {
             if(error instanceof jwt.TokenExpiredError){

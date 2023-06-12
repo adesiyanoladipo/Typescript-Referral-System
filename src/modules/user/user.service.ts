@@ -27,20 +27,23 @@ const service = {
         }) 
         return user
     },
-    // async getPaginatedReferrals(user: type["User"], offset: Number, pageSize: Number){
-    //     const users = await prisma.user.findMany({
-    //         where: {
-    //             referredBy: user.referralCode,
-    //         },
-    //         skip: offset,
-    //         take: pageSize
-    //     })
-    // },
-    async getUserReferrals(user: type["User"]){
+    async getPaginatedReferrals(user: type["User"], offset: number, pageSize: number){
         const users = await prisma.user.findMany({
             where: {
                 referredBy: user.referralCode,
-            }
+            },
+            skip: offset,
+            take: pageSize
+        })
+        return users
+    },
+    async getUserReferrals(user: type["User"], offset: number, pageSize: number){
+        const users = await prisma.user.findMany({
+            where: {
+                referredBy: user.referralCode,
+            },
+            skip: offset,
+            take: pageSize
         })
         return users
     }
