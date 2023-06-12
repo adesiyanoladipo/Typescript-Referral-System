@@ -1,9 +1,11 @@
-import service from "./auth.service"
+import userService from "../user/user.service"
+import authService from "./auth.service"
+
 import type from './auth.interface'
 
 const repository = {
     async findUserByEmail(email:string) {
-        const user = await service.findUserByEmail(email) 
+        const user = await userService.findUserByEmail(email) 
         if(user){
             return user
         }
@@ -11,7 +13,7 @@ const repository = {
     },
 
     async createUser(userPayload: type["User"]) {
-        const user = await service.createUser(userPayload) 
+        const user = await authService.createUser(userPayload) 
         if(user){
             return user
         }
@@ -19,7 +21,7 @@ const repository = {
     },
 
     async findUserByreferralCode(referralCode: string) {
-        const user = await service.findUserByreferralCode(referralCode)
+        const user = await userService.findUserByreferralCode(referralCode)
         if(!user){
             null
         } else {
@@ -27,7 +29,7 @@ const repository = {
         }
     },
     async getAuthByUserId(userId: string) {
-        const user = await service.getAuthByUserId(userId)
+        const user = await authService.getAuthByUserId(userId)
         if(!user){
             null
         } else {

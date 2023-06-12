@@ -1,14 +1,14 @@
 import { FastifyInstance } from "fastify";
-import auth from './auth.controller'
+import AuthController from './auth.controller'
 import { $ref } from "./auth.schema";
 
 async function userRoutes(server: FastifyInstance ) {
     server.post( '/register',  {
         schema: { body: $ref('createUserSchema') }
     }, 
-    auth.registerUserHandler
+    AuthController.registerUserHandler
     ),
-    server.post('/login', auth.loginUserHandler
+    server.post('/login', AuthController.loginUserHandler
     )
 }
 

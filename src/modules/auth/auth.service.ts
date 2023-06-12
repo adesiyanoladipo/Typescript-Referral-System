@@ -1,16 +1,9 @@
 import { CreateUserInput } from "./auth.schema";
-import token from "../../utils/token";
-import prisma from "../../utils/prisma";
-import Utils from '../../helpers/utils'
+import token from "../../utils/token.util";
+import prisma from "../../utils/prisma.util";
+import Utils from '../../helpers/utils.helper'
 
 const service = {
-    async findUserByEmail(userEmail: string) {
-        const email = userEmail
-        const user = await prisma.user.findUnique({ 
-            where: { email }
-        })
-        return user;
-    },
     async createUser(userPayload: CreateUserInput) {
         const { password, ...rest } = userPayload
         const hash = await token.hashPassword(password) 
@@ -24,15 +17,6 @@ const service = {
         })
         return user;
     },
-    async findUserByreferralCode(referralCode: string) {
-        if(!referralCode){
-            return null
-        }
-        const user = await prisma.user.findUnique({ 
-            where: { referralCode: referralCode }
-        }) 
-        return user
-    },
     async getAuthByUserId(userId: string) {
         if(!userId){
             return null
@@ -41,7 +25,7 @@ const service = {
             where: { userId: userId }
         }) 
         return auth
-    }
+    },
 }
 
 export default service

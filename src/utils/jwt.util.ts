@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken';
-import config from 'config';
 import Type from '../modules/auth/auth.interface'
 
 const jwtToken = {
-   async signJwt(user: Type["AuthUser"]){
-    const token = jwt.sign({ id: user.id?.toString() }, `${process.env.accessTokenPrivateKey}`, {
+   async signToken(authUser: Type["AuthUser"]){
+    const token = jwt.sign({ id: authUser.id?.toString() }, `${process.env.accessTokenPrivateKey}`, {
        expiresIn: `${process.env.accessTokenExpiresIn}m`,
      });
      return token

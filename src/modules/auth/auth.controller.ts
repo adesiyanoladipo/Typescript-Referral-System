@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreateUserInput, loginSchema } from "./auth.schema";
 import repository from "./auth.repository"
-import token from './../../utils/token'
+import hash from './../../utils/token.util'
+import token from './../../utils/jwt.util'
 import { z } from "zod";
 
 const auth = {
@@ -56,7 +56,6 @@ const auth = {
             })
         }
         catch(e){
-            console.log(e)
             return reply.code(500).send({
                 status: 500,
                 success: false,
@@ -97,7 +96,7 @@ const auth = {
             });
           }
           const auth = await repository.getAuthByUserId(user.id) as any;
-          const validPassword = await token.comparePasswords(
+          const validPassword = await hash.comparePasswords(
             body.password,
             auth.password
           );
@@ -127,16 +126,6 @@ const auth = {
                     message: "Something went wrong",
                   });
               }
-            // console.log("this is the error------", error)
-            // if (error instanceof Error && error.name === "ZodError") {
-            //     const validationErrors = error.format();
-            //     return reply.code(400).send({
-            //       status: 400,
-            //       success: false,
-            //       message: "Invalid input",
-            //       errors: validationErrors,
-            //     });
-            // }
           return reply.code(500).send({
             status: 500,
             success: false,
