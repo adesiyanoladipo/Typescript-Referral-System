@@ -8,13 +8,16 @@ const user = {
         reply: FastifyReply
     ) {
         try{
-            const referral = await repository.getuserReferrals(request.user as type["User"])
+            const referrals = await repository.getuserReferrals(request.user as type["User"])
+            const referralLink = `${process.env.SERVER_URL}/api/auth/register/${request.user.referralCode}`
             return reply.code(200).send({
                 status: 200,
                 success: true,
                 data: {
                     user: request.user,
-                    referrals: referral
+                    referral: {
+                        referralLink, referrals
+                    }
                 }
             })
         }

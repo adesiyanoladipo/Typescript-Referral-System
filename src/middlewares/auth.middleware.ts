@@ -3,10 +3,11 @@ import jwt from 'jsonwebtoken';
 import { JwtPayload } from 'jsonwebtoken';
 import authUserRepository from '../modules/auth/auth.repository'
 import userRepository from '../modules/user/user.repository'
+import userTypes from '../modules/user/user.interface'
 
 declare module 'fastify' {
     interface FastifyRequest {
-      user: Object;
+      user: userTypes["User"];
     }
 }
 
@@ -31,7 +32,8 @@ const authMiddleware = {
                     message: "Login to proceed"
                 })
             }
-            request.user = await userRepository.getUserById(authUserId.userId) as Object;
+            const user = await userRepository.getUserById(authUserId.userId)
+            request.user = user as (userTypes["User"]);
         } 
         catch (error) {
             if(error instanceof jwt.TokenExpiredError){

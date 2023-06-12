@@ -11,7 +11,7 @@ const repository = {
         return null
     },
 
-    async createUser(userPayload: type["User"]) {
+    async createUser(userPayload: type["userwithAuth"]) {
         const user = await authService.createUser(userPayload) 
         if(user){
             return user

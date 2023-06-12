@@ -20,7 +20,21 @@ server.get('/healthcheck', async function(){
 })
 
 async function main() {
-
+    server.setErrorHandler(async (err, request, reply) => {
+        return reply.code(500).send({
+            status: 500,
+            success: false,
+            message: "Something went wrong"
+        })
+    }),
+    server.setNotFoundHandler(async (request, reply) => {
+        return reply.code(404).send({
+            status: 404,
+            success: false,
+            message: "Page does not exist"
+        })
+    })
+    
     for (const schema of [...authSchema, ]){
         server.addSchema(schema)
     }
