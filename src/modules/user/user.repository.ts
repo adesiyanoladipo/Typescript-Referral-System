@@ -39,7 +39,16 @@ const repository = {
         catch(err){
             console.log(err)
         }
-    } 
+    },
+    async deleteUserByEmail(email: string){
+        try{
+            const user = await userService.deleteUserByEmail(email)
+            return user
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 }
 
 export default repository

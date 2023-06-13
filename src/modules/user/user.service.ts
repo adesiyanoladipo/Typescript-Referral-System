@@ -46,6 +46,14 @@ const service = {
             take: pageSize
         })
         return users
+    },
+    async deleteUserByEmail(email: string){
+        const deletedAuthor = await prisma.user.delete({
+            where: {
+              email: email,
+            },
+          });
+        return deletedAuthor
     }
 }
 
