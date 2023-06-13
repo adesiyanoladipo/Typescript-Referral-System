@@ -49,7 +49,7 @@ npm run tests
 Run the following command to start the server:
 
 ```bash
-    npm run dev
+npm run dev
 ```
 
 The server will run on http://localhost:3000 by default
