@@ -14,7 +14,7 @@ export const server = fastify({
     genReqId(req) {
       return uuidv4();
     },
-  });
+});
 
 server.get('/healthcheck', async function(){
     return { status: "Ok" }

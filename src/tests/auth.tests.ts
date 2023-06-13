@@ -8,11 +8,13 @@ import userRepo from '../modules/user/user.repository'
 chai.should();
 chai.use(chaiHttp);
 
-describe(`${process.env.serverName} - Account Integration tests`, () => {
+export const email = "johndoe@gmail.com"
+export const password = 'test1234'
+
+describe(`${process.env.serverName} - Auth Integration tests`, () => {
     describe('Post /api/auth/register', function () {
       const email = "johndoe@gmail.com"
       const password = 'test1234'
-
       it('It should POST a new user', async (done) => {
         await userRepo.deleteUserByEmail(email)
         const user = {
