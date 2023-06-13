@@ -57,4 +57,6 @@ The server will run on http://localhost:3000 by default
 </br>
 
 
-Link to [documentation](https://elements.getpostman.com/redirect?entityId=24812037-d856fcbb-2a6a-408a-99b7-59fd0ee8010b&entityType=collection)
+### Conclusion
+
+You can find additional documentation for this API, including request and response signatures, by visiting https://elements.getpostman.com/redirect?entityId=24812037-d856fcbb-2a6a-408a-99b7-59fd0ee8010b&entityType=collection in your web browser.
