@@ -1,4 +1,5 @@
-import fastify, { FastifyInstance } from 'fastify';
+import fastify from 'fastify';
+import indexRoutes from './modules/index/index.route';
 import authRoutes from './modules/auth/auth.route';
 import userRoutes from './modules/user/user.route';
 import { authSchema } from './modules/auth/auth.schema';
@@ -39,6 +40,7 @@ async function main() {
   for (const schema of [...authSchema]) {
     server.addSchema(schema);
   }
+  server.register(indexRoutes, { prefix: '/' });
   server.register(authRoutes, { prefix: 'api/auth/' });
   server.register(userRoutes, { prefix: 'api/user/' });
 

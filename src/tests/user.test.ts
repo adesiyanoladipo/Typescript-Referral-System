@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 import { server } from '../app';
 import { describe, it } from 'node:test';
 import assert from 'assert';
-import { email, password } from '../tests/auth.tests';
+import { email, password } from './auth.test';
 
 chai.should();
 chai.use(chaiHttp);
