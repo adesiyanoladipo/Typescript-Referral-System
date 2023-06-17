@@ -1,12 +1,12 @@
 interface Types {
-  AuthUser: AuthUser
+  AuthUser: AuthUser;
 }
 
 interface AuthUser {
   id: string;
   email: string;
   name: string;
-  password: string,
+  password: string;
 }
 
-export default Types
+export default Types;
