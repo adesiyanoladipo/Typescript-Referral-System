@@ -114,7 +114,6 @@ const auth = {
     } catch (error) {
       console.log(error);
       if (error instanceof z.ZodError) {
-        console.log(error.issues);
         return reply.code(500).send({
           status: 500,
           success: false,
